@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_inventory/screens/item_list.dart';
+import 'package:mobile_inventory/screens/list_product.dart';
+import 'package:mobile_inventory/screens/login.dart';
 import 'package:mobile_inventory/screens/shoplist_form.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class ShopItem {
   final String name;
@@ -17,11 +21,12 @@ class ShopCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Material(
       color: color,
       child: InkWell(
         // Area responsive terhadap sentuhan
-        onTap: () {
+        onTap: () async {
           // Memunculkan SnackBar ketika diklik
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
@@ -32,10 +37,31 @@ class ShopCard extends StatelessWidget {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const ShopFormPage()));
           }
-          else if (item.name == "Lihat Item" ){
+          else if (item.name == "Lihat Item") {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ItemListPage()));
+              MaterialPageRoute(builder: (context) => const ProductPage()));
           }
+
+          else if (item.name == "Logout") {
+          final response = await request.logout(
+              // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
+              "http://kezia-lasma-tugas.pbp.cs.ui.ac.id/auth/logout/");
+          String message = response["message"];
+          if (response['status']) {
+            String uname = response["username"];
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text("$message Sampai jumpa, $uname."),
+            ));
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginPage()),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text("$message"),
+            ));
+          }
+        }
         },
         child: Container(
           // Container untuk menyimpan Icon dan Text

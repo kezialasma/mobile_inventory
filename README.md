@@ -1,4 +1,43 @@
 <details>
+<summary>TUGAS 9</summary>  
+
+1.  Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?  
+Pengambilan data JSON bisa dilakukan tanpa harus membuat model terlebih dahulu, terutama saat menggunakan API eksternal atau ketika kita hanya perlu sebagian kecil dari data yang diambil, maka kita dapat menggunakan tipe data yang ada di Dart (seperti Map atau List) untuk menampung dan memanipulasi data JSON yang diterima.  
+
+2.  Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.  
+CookieRequest pada Flutter adalah sebuah kelas atau instance yang digunakan untuk mengelola permintaan HTTP dan juga mengatur autentikasi dengan menggunakan cookie dimana kita dapat melakukan permintaan HTTP dengan mudah ke server, menjaga sesi autentikasi dengan cookie untuk berbagai permintaan dan berbagi informasi autentikasi dan koneksi HTTP ke berbagai bagian aplikasi Flutter seperti layar, widget, atau komponen lainnya.  
+3.  Jelaskan mekanisme pengambilan data dari JSON hingga dapat ditampilkan pada Flutter.  
+a. Pengambilan Data JSON: Data diambil dari server atau API dalam bentuk JSON menggunakan metode permintaan HTTP seperti GET atau POST 
+b. Deserialisasi JSON: Data JSON yang diterima diubah menjadi objek Dart menggunakan metode jsonDecode() dari dart:convert.  
+c. Manipulasi dan Pemrosesan Data: Data yang telah diubah menjadi objek Dart dapat dimanipulasi, difilter, atau diurutkan sesuai kebutuhan d. Pembaruan UI: Data yang sudah diproses ditampilkan pada antarmuka pengguna (UI) menggunakan widget-widget Flutter seperti ListView, GridView, atau widget khusus untuk menampilkan data.
+
+4.  Jelaskan mekanisme autentikasi dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.  
+a. Autentikasi dari Input Data Akun pada Flutter ke Django:  
+1. Pengguna memasukkan informasi akun pada aplikasi Flutter.  
+2. Informasi tersebut dikirim ke server Django melalui permintaan HTTP, sering kali dalam format JSON.  
+3. Server Django memeriksa informasi masuk, melakukan verifikasi, dan memberikan tanggapan sesuai dengan hasil autentikasi.  
+b. Autentikasi: jika autentikasi berhasil, server Django akan memberikan respons yang sesuai.
+Aplikasi Flutter menerima respons tersebut dan menampilkan antarmuka pengguna yang sesuai, seperti menavigasi ke layar atau halaman yang menunjukkan menu aplikasi kepada pengguna.  
+
+5.  Sebutkan seluruh widget yang kamu pakai pada tugas ini dan jelaskan fungsinya masing-masing.  
+a. MaterialApp: Titik awal aplikasi yang menggunakan Material Design, mengatur tema dan navigasi.  
+b. Scaffold:	Menyediakan struktur dasar layout Material, termasuk app bar, body, dan lainnya.
+c. AppBar	Menampilkan bar aplikasi di bagian atas layar, biasanya berisi judul dan aksi.
+d. TextFormField	Widget input teks yang memungkinkan pengguna memasukkan data, seperti username dan password.
+e. ListView	Widget scrollable yang menampilkan daftar item dalam bentuk linear.
+f. Text	Menampilkan string teks sederhana pada UI.  
+g. Image	Menampilkan gambar dari berbagai sumber, seperti jaringan atau aset lokal  
+h. Navigator	Mengatur rute halaman di aplikasi, seperti navigasi ke halaman baru.  
+i. FutureBuilder	Membangun widget berdasarkan hasil terakhir dari interaksi Future, seperti request HTTP.  
+j. Card	Widget Material dengan sudut melengkung dan bayangan, sering digunakan untuk menampilkan konten secara terorganisir.  
+k. Padding	Menambahkan padding di sekeliling widget anaknya.  
+l. Column/Row	Menata widget anaknya secara vertikal (Column) atau horizontal (Row).  
+m. Icon	Menampilkan ikon dari set Material Icons.  
+n. IconButton	Tombol dengan area tekan yang menampilkan ikon, sering digunakan di AppBar.  
+
+6. 
+</details>
+<details>
 <summary>TUGAS 8</summary> 
 
 1. Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!  
@@ -43,7 +82,33 @@
     1. Membuat file baru pada direktori widgets dan membuat struktur widget untuk drawer tersebut  
     2. Pada bagian routing, kita akan menambahkan ListTile, dimana ini akan menginisiasi bagian pada drawer yang akan me-route ke halama yang diinginkan ketika bagian tersebut diklik. Pada ListTile tersebut berisi ```leading``` yang dapat diisi const Icon, kemudian ada bagian ```title``` atau judul dari bagian tersebut, dan Navigator yang berada didalam onTap  
     3. Menghias header drawer didalam bagian const DrawerHeader()  
-    4. Menambahkan drawer pada page yang diinginkan (misal, pada menu.dart) dengan memasukkan drawer sebagai parameter nilai drawer dari widget Scaffold pada menu.dart
+    4. Menambahkan drawer pada page yang diinginkan (misal, pada menu.dart) dengan memasukkan drawer sebagai parameter nilai drawer dari widget Scaffold pada menu.dart  
+
+6. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial)
+a. Membuat UI Login di Flutter: Struktur Dasar: Gunakan MaterialApp dan Scaffold untuk membuat struktur dasar halaman.
+Form Input: Gunakan TextFormField untuk input username dan password.
+Tombol Login: Tambahkan ElevatedButton untuk mengirim data form.
+Validasi Input: Implementasikan validasi sederhana untuk input form menggunakan Form dan GlobalKey<FormState>.  
+b. Implementasi Autentikasi di Django  
+Model Pengguna: Pastikan model pengguna Django siap digunakan.  
+Endpoint API: Buat endpoint API untuk autentikasi menggunakan Django Rest Framework  
+Autentikasi Token: Gunakan sistem token (misalnya TokenAuthentication di DRF) untuk mengelola sesi pengguna.  
+c. Integrasi API dengan Flutter  
+HTTP Request: Gunakan paket http di Flutter untuk mengirimkan data login ke endpoint Django.  
+Pengelolaan State: Gunakan setState atau state management lain (seperti Provider) untuk mengelola state autentikasi.  
+Pengelolaan Respons: Tangani response dari server (token atau pesan error) dan simpan token di SharedPreferences jika login berhasil 
+d.Navigasi dan Tampilan Menu
+Halaman Menu: Buat halaman menu baru di Flutter.
+Navigasi: Setelah login berhasil, gunakan Navigator untuk beralih ke halaman menu.
+Menampilkan Data: Jika perlu, buat request ke Django untuk mengambil data yang ditampilkan di menu.
+e. Implementasi Fitur Tambahan  
+Daftar Produk: Implementasikan ListView.builder untuk menampilkan produk.
+Halaman Detail Produk: Buat halaman baru untuk detail produk. Gunakan Navigator untuk transisi ke halaman ini ketika produk dipilih.
+Autentikasi di Request Lain: Sertakan token autentikasi di header untuk request lain yang memerlukan autentikasi.  
+f. Pengujian dan Debugging
+Uji Fungsionalitas: Lakukan pengujian manual untuk memastikan semua fitur berfungsi seperti yang diharapkan.
+Debugging: Gunakan tools debugging di Flutter dan Django untuk menyelesaikan masalah yang muncul.  
+g. Refactoring Kode: Refactor kode untuk meningkatkan efisiensi dan keterbacaan.
 
 </details>
 
